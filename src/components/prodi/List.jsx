@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react"
 import axios from "axios"
+import { NavLink } from "react-router-dom"
 
 export default function List() {
 
@@ -19,6 +20,9 @@ export default function List() {
     return (
         <div>
             <h2>List Program Studi</h2>
+                <NavLink to="/prodi/create" className="btn btn-primary mb-3">
+                    Create
+                </NavLink>
             <table className="table table-striped table-hover">
                 <thead> 
                     <tr>

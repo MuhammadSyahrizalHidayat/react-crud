@@ -3,7 +3,9 @@ import { BrowserRouter as Router, Route, Routes, NavLink } from "react-router-do
 
 const Home = React.lazy( ()=> import('./components/Home') )
 const FakultasList = React.lazy( ()=> import('./components/fakultas/List') )
+const FakultasCreate = React.lazy( ()=> import('./components/fakultas/Create') )
 const ProdiList = React.lazy( ()=> import('./components/prodi/List') )
+const ProdiCreate = React.lazy( ()=> import('./components/prodi/Create') )
 
 function App() { 
   
@@ -38,9 +40,12 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/fakultas" element={<FakultasList />} />
+          <Route path="/fakultas/create" element={<FakultasCreate />} />
           <Route path="/prodi" element={<ProdiList />} />
+          <Route path="/prodi/create" element={<ProdiCreate />} />
         </Routes>
       </Suspense>
+        <div>&copy; Rizal Mahasiswa MDP</div>
       </div>
     </Router>
   )

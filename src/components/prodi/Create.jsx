@@ -1,0 +1,64 @@
+// src/components/Fakultas/Create.jsx
+import React, { useState } from "react"; // Import React dan useState untuk menggunakan state hooks 
+import axios from "axios"; // Import axios untuk melakukan HTTP request
+
+export default function CreateProdi() {
+    // Inisialisasi state untuk menyimpan nama Prodi 
+    const [namaProdi, setNamaProdi] = useState(""); 
+    const [fakultasId, setFakultasId] = useState(""); 
+    const [fakultasList, setFakultasList] = useState([]); 
+    // Inisialisasi state untuk menyimpan pesan error 
+    const [error, setError] = useState("");
+    // Inisialisasi state untuk menyimpan pesan sukses 
+    const [success, setSuccess] = useState("");
+
+    // Fungsi yang akan dijalankan saat form disubmit 
+    const handleSubmit= async (e) => {
+        e.preventDefault(); // Mencegah reload halaman setelah form disubmit 
+        setError(""); // Reset pesan error sebelum proses
+        setSuccess(""); // Reset pesan sukses sebelum proses
+        
+        // Validasi input: jika nama Fakultas kosong, set pesan error
+        if (namaFakultas.trim() === "") {
+        setError("Nama Fakultas is required"); // Set pesan error jika input kosong 
+        return; // Stop eksekusi fungsi jika input tidak valid
+        }
+        try{
+        //Melakukan HTTP POST request untuk menyimpan data fakultas
+        const response = await axios.post(
+            "https://project-apiif-3-b.vercel.app/api/api/prodi", //Endpoint API yang dituju
+            {
+                nama:namaFakultas,
+            }
+        );
+
+        if(response.status === 201) {
+            setSuccess("Fakultas created successfully!");
+            setNamaFakultas("");
+        } else{
+            setError("Failed to create fakultas");
+        }
+        }catch(error){
+            setError("An error occurred while creating fakultas");
+        }
+    };
+
+    return(
+        <div className="container mt-5">
+            <h2 className="mb-4">Create Fakultas</h2>
+            {error && <div className="alert alert-danger">{error}</div>}
+            {success && <div className="alert alert-success">{success}</div>}
+            <form onSubmit={handleSubmit}>
+                <div className="mb-3">
+                    <label htmlFor="namaFakultas" className="form-label">
+                        Nama Fakultas
+                    </label>
+                    <input type="text" className="form-control" id="namaFakultas" value={namaFakultas} onChange={(e) => setNamaFakultas(e.target.value)} placeholder="Enter Fakultas Name" />
+                </div>  
+                <button type="submit" className="btn btn-primary">
+                    Create
+                </button>
+            </form>
+        </div>
+    );
+}
