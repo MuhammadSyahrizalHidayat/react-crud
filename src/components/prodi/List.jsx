@@ -28,6 +28,7 @@ export default function List() {
                     <tr>
                         <th>Nama Prodi</th>
                         <th>Nama Fakultas</th>
+                        <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -35,6 +36,12 @@ export default function List() {
                     <tr key={data.id}>
                         <td>{data.nama}</td>
                         <td>{data.fakultas.nama}</td>
+                        <td>
+                        <button onClick={ () => handleDelete(data.id, data.nama)} className="btn btn-danger btn-sm">
+                            Hapus
+                            </button>
+                            <NavLink to={`/Prodi/edit/${data.id}`} className="btn btn-warning btn-sm">Ubah</NavLink>
+                            </td>
                     </tr>
                 ))}
                 </tbody>

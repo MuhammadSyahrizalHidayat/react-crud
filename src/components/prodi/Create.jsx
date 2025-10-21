@@ -12,6 +12,17 @@ export default function CreateProdi() {
     // Inisialisasi state untuk menyimpan pesan sukses 
     const [success, setSuccess] = useState("");
 
+    // panggil API Fakultas menggunakan useEffect dan axios
+        useEffect( ()=> {
+
+            axios
+            .get("https://project-apiif-3-b.vercel.app/api/api/prodi")
+            .then( (response) => {
+                console.log(response.data);
+                setProdi(response.data.result);
+            })
+        }, [])
+
     // Fungsi yang akan dijalankan saat form disubmit 
     const handleSubmit= async (e) => {
         e.preventDefault(); // Mencegah reload halaman setelah form disubmit 
@@ -19,8 +30,8 @@ export default function CreateProdi() {
         setSuccess(""); // Reset pesan sukses sebelum proses
         
         // Validasi input: jika nama Fakultas kosong, set pesan error
-        if (namaFakultas.trim() === "") {
-        setError("Nama Fakultas is required"); // Set pesan error jika input kosong 
+        if (namaProdi.trim() === "") {
+        setError("Nama Prodi is required"); // Set pesan error jika input kosong 
         return; // Stop eksekusi fungsi jika input tidak valid
         }
         try{
@@ -34,7 +45,7 @@ export default function CreateProdi() {
 
         if(response.status === 201) {
             setSuccess("Fakultas created successfully!");
-            setNamaFakultas("");
+            setNamaProdi("");
         } else{
             setError("Failed to create fakultas");
         }
@@ -45,15 +56,15 @@ export default function CreateProdi() {
 
     return(
         <div className="container mt-5">
-            <h2 className="mb-4">Create Fakultas</h2>
+            <h2 className="mb-4">Create Prodi</h2>
             {error && <div className="alert alert-danger">{error}</div>}
             {success && <div className="alert alert-success">{success}</div>}
             <form onSubmit={handleSubmit}>
                 <div className="mb-3">
-                    <label htmlFor="namaFakultas" className="form-label">
-                        Nama Fakultas
+                    <label htmlFor="namaProdi" className="form-label">
+                        Nama Prodi
                     </label>
-                    <input type="text" className="form-control" id="namaFakultas" value={namaFakultas} onChange={(e) => setNamaFakultas(e.target.value)} placeholder="Enter Fakultas Name" />
+                    <input type="text" className="form-control" id="namaProdi" value={namaProdi} onChange={(e) => setNamaProdi(e.target.value)} placeholder="Enter Prodi Name" />
                 </div>  
                 <button type="submit" className="btn btn-primary">
                     Create

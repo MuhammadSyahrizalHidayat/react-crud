@@ -57,12 +57,27 @@ export default function List() {
             <NavLink to="/fakultas/create" className="btn btn-primary mb-3">
                 Create
             </NavLink>
-
-            <ul>
+            <table className="table table-bordered">
+            <thead>
+                <tr> 
+                <th>Nama Fakultas</th>
+                <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
                 {fakultas.map( (data) => (
-                    <li key={data.id}>{data.nama}</li>
+                    <tr key={data.id}>
+                    <td>{data.nama}</td>
+                    <td>
+                        <button onClick={ () => handleDelete(data.id, data.nama)} className="btn btn-danger btn-sm">
+                            Hapus
+                        </button>
+                        <NavLink to={`/fakultas/edit/${data.id}`} className="btn btn-warning btn-sm">Ubah</NavLink>
+                    </td>
+                    </tr>
                 ))}
-            </ul>
+            </tbody>
+            </table>
         </div>
     )
 }
