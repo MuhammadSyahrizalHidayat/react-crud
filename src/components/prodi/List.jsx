@@ -21,7 +21,7 @@ export default function List() {
         <div>
             <h2>List Program Studi</h2>
                 <NavLink to="/prodi/create" className="btn btn-primary mb-3">
-                    Create
+                    Tambah
                 </NavLink>
             <table className="table table-striped table-hover">
                 <thead> 
