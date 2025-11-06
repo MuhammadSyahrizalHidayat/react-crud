@@ -30,10 +30,7 @@ export default function CreateFakultas() {
         {
           nama: namaFakultas, // Data yang dikirim berupa objek JSON dengan properti 'nama'
         }
-      ).catch((error) => {
-        // console.log(error.response.data);
-        setError(error.response.data.message);
-      });
+      );
 
       // Jika response HTTP status 201 (Created), berarti berhasil
       if (response.status === 201) {
@@ -46,7 +43,7 @@ export default function CreateFakultas() {
       }
     } catch (error) {
       // Jika terjadi error (misal masalah jaringan), tampilkan pesan error
-      // setError("An error occurred while creating fakultas");
+      setError("An error occurred while creating fakultas");
     }
   };
 
